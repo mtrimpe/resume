@@ -16,8 +16,8 @@
 \setlength{\sectionindent}{26mm}
 \newlength{\detailsheigth}
 \setlength{\detailsheigth}{42mm}
-\newlength{\datemarginwidth}
-\setlength{\datemarginwidth}{4pt}
+\newlength{\marginwidth}
+\setlength{\marginwidth}{4pt}
 \newlength{\sectionheaderindent}
 \setlength{\sectionheaderindent}{12mm}
 
@@ -57,36 +57,40 @@
         \rule{\textwidth}{1pt}
     \end{minipage}\strut\vspace{3mm}}
 
-% Date margin command
-\newcommand{\datemargin}[1]{
-    \begin{minipage}[t]{\dimexpr\sectionindent-\datemarginwidth}
+% Margin command
+\newcommand{\margin}[1]{
+    \begin{minipage}[t]{\dimexpr\sectionindent-\marginwidth}
         \begin{flushright}
             \textit{#1}
         \end{flushright}
     \end{minipage}
-    \hspace{\datemarginwidth}}
-
-% Empty margin command
-\newcommand{\emptymargin}[0]{
-    \begin{minipage}[t]{\sectionindent}
-    \strut
-    \end{minipage}}
+    \hspace{\marginwidth}}
 
 % Summary section environment
-\newenvironment{summarysection}{
+\newenvironment{descriptionsection}{
     \begingroup
     \setlength{\parskip}{4pt plus 2pt minus 1pt} 
 }{
     \endgroup
 }
+
+% Summary entry command
+\newcommand{\summaryentry}[1]{
+    \margin{}
+    \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
+        \begin{descriptionsection}
+            #1
+        \end{descriptionsection}
+    \end{minipage}}
+
 % Job entry command
 \newcommand{\jobentry}[4]{
-    \datemargin{#1}
+    \margin{#1}
     \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
         \textbf{#2} at \textit{\textbf{#3}}\\[1pt]
-        \begin{summarysection}
+        \begin{descriptionsection}
         #4
-        \end{summarysection}
+        \end{descriptionsection}
     \end{minipage}\vspace{4pt}}
 
 % Custom itemize list settings
@@ -102,7 +106,7 @@
 
 % Itemized job entry command
 \newcommand{\itemizedjobentry}[3]{
-  \datemargin{#1}
+  \margin{#1}
   \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
     \textbf{#2}
     \vspace{1pt}
@@ -123,14 +127,6 @@
     \end{minipage}
     \par}
 
-% Summary entry command
-\newcommand{\summaryentry}[1]{
-    \emptymargin
-    \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
-        \begin{summarysection}
-            #1
-        \end{summarysection}
-    \end{minipage}}
 
 \begin{document}
 \personaldetails
@@ -145,9 +141,9 @@
 
 \sectionheader{Summary}
 \summaryentry{
-I help achieve team-product-market fit for companies facing urgent and complex product development challenges.
+I help companies facing complex product development challenges achieve team-product-market within 6 to 18 months.
 
-For this I draw on nearly two decades of experience with tackling such challenges in roles such as software developer, tech lead, solution architect, technical founder, CTO, engineering manager and product owner.}
+For this I draw on nearly two decades of experience tackling such challenges in roles ranging from software developer to tech lead, solution architect, technical founder, CTO, engineering manager and product owner.}
 
 \sectionheader{Professional History}
 \jobentry{mar 2022\\-- present}{Product Owner Data Quality Engines}{ABN Amro}{
