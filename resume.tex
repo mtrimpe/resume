@@ -1,0 +1,221 @@
+% Document class and basic packages
+\documentclass[a4paper,11pt]{article}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{eurosym}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% Page layout settings
+\geometry{margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+% Custom lengths for various formatting elements
+\newlength{\sectionindent}
+\setlength{\sectionindent}{26mm}
+\newlength{\detailsheigth}
+\setlength{\detailsheigth}{42mm}
+\newlength{\datemarginwidth}
+\setlength{\datemarginwidth}{4pt}
+\newlength{\sectionheaderindent}
+\setlength{\sectionheaderindent}{12mm}
+
+% Header and footer settings
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small Michiel Trimpe -- Technology Consultant -- michiel@trimpe.nl -- +31(0)6-41482341}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Personal details command
+\newcommand{\personaldetails}[4]{
+    \begin{minipage}[t][\detailsheigth]{\dimexpr\textwidth-\detailsheigth-2pt}
+        \vspace{0pt}
+        \begin{minipage}[t]{\textwidth}\openup 1em
+            {\huge\textbf{\MakeUppercase{#1}}}
+            \par
+            {\LARGE\textsc{\MakeUppercase{#2}}}
+        \end{minipage}
+        \vfill
+        \begin{minipage}[b]{\textwidth}
+            #3
+        \end{minipage}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{\detailsheigth}
+        \vspace{0pt}
+        \raggedleft 
+        \includegraphics[width=\detailsheigth,height=\detailsheigth]{#4}
+    \end{minipage}}
+
+% Section header command
+\newcommand{\sectionheader}[1]{
+    \vspace{1mm}
+    \begin{minipage}[t]{\textwidth}
+        \hspace{\sectionheaderindent}\textbf{\textsc{#1}}\\[-8pt\baselineskip] 
+        \rule{\textwidth}{1pt}
+    \end{minipage}\strut\vspace{3mm}}
+
+% Date margin command
+\newcommand{\datemargin}[1]{
+    \begin{minipage}[t]{\dimexpr\sectionindent-\datemarginwidth}
+        \begin{flushright}
+            \textit{#1}
+        \end{flushright}
+    \end{minipage}
+    \hspace{\datemarginwidth}}
+
+% Empty margin command
+\newcommand{\emptymargin}[0]{
+    \begin{minipage}[t]{\sectionindent}
+    \strut
+    \end{minipage}}
+
+% Summary section environment
+\newenvironment{summarysection}{
+    \begingroup
+    \setlength{\parskip}{4pt plus 2pt minus 1pt} 
+}{
+    \endgroup
+}
+% Job entry command
+\newcommand{\jobentry}[4]{
+    \datemargin{#1}
+    \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
+        \textbf{#2} at \textit{\textbf{#3}}\\[1pt]
+        \begin{summarysection}
+        #4
+        \end{summarysection}
+    \end{minipage}\vspace{4pt}}
+
+% Custom itemize list settings
+\newlist{customitemize}{itemize}{1} 
+\setlist[customitemize]{ 
+  leftmargin=*, % Set the left margin to be calculated automatically
+  labelindent=-16pt, % Set the indent for the label (bullet) to the left of the default position
+  labelsep=10pt, % Set the distance between the label (bullet) and the text 
+  label=\textbullet, % Set the label (bullet) symbol to be the standard bullet (\textbullet)
+  itemsep=0.5pt, % Set the vertical space between items 
+  nosep % Remove additional vertical space around the list
+}
+
+% Itemized job entry command
+\newcommand{\itemizedjobentry}[3]{
+  \datemargin{#1}
+  \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
+    \textbf{#2}
+    \vspace{1pt}
+    \begin{customitemize}
+      #3
+    \end{customitemize}
+    \vspace{1pt}
+  \end{minipage}}
+
+% Education entry command
+\newcommand{\educationentry}[4]{
+    \noindent
+    \begin{minipage}[t]{\sectionindent}
+        #1 -- #2
+    \end{minipage}
+    \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
+        \textbf{#3}, #4
+    \end{minipage}
+    \par}
+
+% Summary entry command
+\newcommand{\summaryentry}[1]{
+    \emptymargin
+    \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
+        \begin{summarysection}
+            #1
+        \end{summarysection}
+    \end{minipage}}
+
+\begin{document}
+\personaldetails
+    {Michiel Trimpe}
+    {Technology Consultant}
+    {
+        Wijttenbachstraat 21A, 1093HR Amsterdam\\
+        michiel@trimpe.nl / +31(0)6-41482341\\
+        linkedin.com/in/mtrimpe
+    }
+    {./profile.jpg}
+
+\sectionheader{Summary}
+\summaryentry{
+I help achieve team-product-market fit for companies facing urgent and complex product development challenges.
+
+For this I draw on nearly two decades of experience with tackling such challenges in roles such as software developer, tech lead, solution architect, technical founder, CTO, engineering manager and product owner.}
+
+\sectionheader{Professional History}
+\jobentry{mar 2022\\-- present}{Product Owner Data Quality Engines}{ABN Amro}{
+Within ABN Amro's Data Platform I lead the teams responsible for consistently monitoring that ABN Amro’s data adheres to regulatory and internal constraints. 
+
+The challenge consists of leading an operational team (8FTE) which hand-codes data constraints and a product team (8FTE) which develops a scalable self-service-ready solution for the operational team to migrate towards.}
+
+\jobentry{aug 2020\\-- feb 2022}{Product Owner Data Services}{Gemeente Amsterdam}{
+I joined the Amsterdam Open Data Platform at a stage where it had outgrown its 'project per dataset' technical and organisational architecture.
+
+There I built and led a team that automatically generated REST, geospatial and BI/SQL data services for a federated data hub/self-service data mesh architecture to allow the data organisation to scale an order of magnitude.
+
+We also prepared the infrastructure for high-security data storage according to BBN2+ standards; including a migration from an IaaS cloud to Azure.
+
+In oktober 2021 these services were recognised in the Dutch national data strategy as a possible foundation for the future Dutch data infrastructure.}
+
+\jobentry{may 2018\\-- mar 2019}{Interim Development Manager}{AutoTrack, de Persgroep}{
+I joined AutoTrack after losing 70\% of their development team at a time when a single point of failure in their platform was on the brink of overload.
+
+I helped them stabilise the system; rebuild the development team; double site performance and initiate a frontend redesign to improve conversion.}
+
+\jobentry{jan 2017\\-- sep 2017}{Interim CTO}{Synple}{
+I helped a logistics exchange startup scale up quickly by recruiting an inhouse Clojure development team, setting up a heterogeneous real-time processing architecture, arranging integration with external TMS providers and setting up an agile process to quickly deliver value iteratively.
+
+Enabled them to successfully secure a \EUR{1.1}mln investment in 9 months.}
+
+\sectionheader{Professional History}
+\jobentry{oct 2014\\-- dec 2016}{Solution Architect}{Backbase}{
+Led initial setup and alignment for two key workstreams of HSBC’s billion dollar technology overhaul for Commercial Banking (London/Hong Kong.)
+
+Led solution architecture and management of the co-development roadmap for the internet banking implementation at Argenta.
+
+Performed pre- and post sale solution architecture support for Internet Banking solutions for clients like Sberbank, Ambank, Gulfbank, KeyBank}
+
+\jobentry{aug 2010\\-- sep 2014}{Technical Founder}{Interactly}{
+Founded and built a SaaS product for conducting asynchronous (time-shifted) browser-based video interviews using Flash with best-in-class user experience for recording interactions by non-technical users world-wide.
+
+Abandoned after finding product market fit due to an illness in the family.}
+
+\jobentry{nov 2009\\-- nov 2012}{Solution Architect \& Lead}{TomTom}{
+Played a key part in development of TomTom's new secure content provisioning platform as a developer, scrum master and tech lead.
+
+Led development of a provisioning API for automotive partners as architect and product owner netting over \EUR{1}mln additional revenue in the process.}
+
+\jobentry{2009}{Senior R\&D Developer}{BackBase}{
+Joined in the final stage of their strategic pivot into the portal market. There I performed a last-minute rewrite of the portal core to achieve the 10x scalability improvement required for a successful launch with their first pilot client Ziggo.
+
+Backbase is now Netherland’s 2\textsuperscript{nd} bootstrapped unicorn.}
+
+\itemizedjobentry{2006 -- 2008}{Independent Freelance Developer}{
+    \item ADCN-awarded \& Webby-nominated Blogsfam micro donation platform
+    \item Kitchentop webshop with live order visualization
+    \item System design for the GrowthAnalyser medical tracking application.
+    \item Self-auditing webapp for TomTom phone, provider \& device compatibility
+    \item Assisted with launch of Cycleon; one of the first reverse logistics providers.
+    \item Built ANWB Hiking\&Biking portal and customized Bloomreach CMS.
+}
+
+\jobentry{2005}{Entrepreneur}{Mondiality (Brno, Czech Republic)}{
+Started a company for a workflow-assisted online real-estate exchange.
+
+Failed to acquire funding beyond the business-planning stage.}
+
+\jobentry{1999 -- 2000}{Application Developer}{UPC Nederland}{Solo development of web based 200+ agent customer support system}
+
+\sectionheader{Education}
+\educationentry{2000}{2003}{Industrial Engineering and Maintenance Science}{TU/e}
+\educationentry{2001}{2002}{Management and Organizational Sciences}{University of Tilburg}
+\educationentry{1997}{1998}{High School}{Susquehanna Township High School, Harrisburg, PA}
+\educationentry{1994}{2000}{VWO Atheneum-b}{Christiaan Huygens College, Eindhoven}
+\end{document}
