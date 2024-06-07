@@ -118,10 +118,9 @@
 
 % Education entry command
 \newcommand{\educationentry}[4]{
-    \noindent
-    \begin{minipage}[t]{\sectionindent}
-        #1 -- #2
-    \end{minipage}
+    \margin{
+        #1 \ifthenelse{\equal{#1}{}}{}{--} #2
+    }
     \begin{minipage}[t]{\dimexpr\textwidth-\sectionindent}
         \textbf{#3}, #4
     \end{minipage}
